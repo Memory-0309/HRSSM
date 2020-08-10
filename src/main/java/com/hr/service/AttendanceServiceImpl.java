@@ -2,12 +2,14 @@ package com.hr.service;
 
 import com.hr.dao.AttendanceDao;
 import com.hr.pojo.Attendance;
+import com.hr.vo.EmpAttendVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService{
@@ -40,5 +42,21 @@ public class AttendanceServiceImpl implements AttendanceService{
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    @Override
+    public List<EmpAttendVO> selectLeveByEmpnumber(Integer employeeNumber) {
+       String leve = attendanceDao.selectLeveByEmpnumber(employeeNumber);
+       List<EmpAttendVO> list = null;
+       if (leve.equals("部门员工")){
+            list=attendanceDao.selectAttendanceByEmpnumber(employeeNumber);
+       }else if (leve.equals("部门主任")){
+            list = attendanceDao.selectDeptnoAttendance(employeeNumber);
+       }else if (leve.equals("人事部员工") || leve.equals("人事部主任")){
+            list = attendanceDao.selectAllAttendance();
+       }
+        return list;
     }
 }

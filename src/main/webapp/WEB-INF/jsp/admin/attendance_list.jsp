@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="edu.hebeu.entity.*" %>
-<%@ page import="edu.hebeu.util.MTimeUtil"%>
+<%@ page import="com.hr.util.MTimeUtil"%>
+<%@ page import="com.hr.vo.EmpAttendVO" %>
+<%@ page import="java.util.List" %>
+
 <% String path = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
@@ -49,27 +50,27 @@
 							</thead>
 							<tbody>
 							<%
-                            	List<Attendance> list = (List<Attendance>)request.getAttribute("aList");
+                            	List<EmpAttendVO> list = (List<EmpAttendVO>)request.getAttribute("aList");
                             	int index=1;
-                            	for(Attendance attendance : list){
+                            	for(EmpAttendVO eavo : list){
                             %>
 								<tr class="gradeA">
 									<td><%=index++ %></td>
-									<td><%=attendance.getEmployeeNumber() %></td>
-									<td><%=attendance.getEmployee().getName() %></td>
+									<td><%=eavo.getEmployeeNumber() %></td>
+									<td><%=eavo.getName() %></td>
 									<%
-										String day = MTimeUtil.dateFormat(attendance.getDay());
-										String startTime = MTimeUtil.timeFormat(attendance.getStartTime());
+										String day = MTimeUtil.dateFormat(eavo.getDay());
+										String startTime = MTimeUtil.timeFormat(eavo.getStartTime());
 										if(startTime == null) startTime="";
-										String endTime = MTimeUtil.timeFormat(attendance.getEndTime());
+										String endTime = MTimeUtil.timeFormat(eavo.getEndTime());
 										if(endTime == null) endTime="";
 									%>
 									<td><%=day %></td>
-									<td><%=attendance.getTimeType() %></td>
+									<td><%=eavo.getTimeType() %></td>
 									<td><%=startTime %></td>
-									<td><%=attendance.getStartType() %></td>
+									<td><%=eavo.getStartType() %></td>
 									<td><%=endTime %></td>
-									<td><%=attendance.getEndType() %></td>
+									<td><%=eavo.getEndType() %></td>
 								</tr>
 							<%
                             	}

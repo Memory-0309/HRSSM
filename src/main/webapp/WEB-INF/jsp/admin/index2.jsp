@@ -75,7 +75,7 @@
 							</li>
 							<li><a class="J_menuItem" href="<%=path %>/employee/oneself/<%=employee.getId() %>/toUpdate.do">修改个人信息</a>
 							</li>
-							<li><a class="J_menuItem" href="<%=path %>/attendance/<%=employee.getEmployeeNumber() %>/oneself.do">查看考勤记录</a>
+							<li><a class="J_menuItem" href="<%=path %>/attendance/oneself?employeeNumber=<%=employee.getEmployeeNumber()%>">查看考勤记录</a>
 							</li>
 							<li><a class="J_menuItem" href="<%=path %>/overtime/<%=employee.getEmployeeNumber() %>/oneself.do?pageNo=1">查看加班信息</a>
 							</li>

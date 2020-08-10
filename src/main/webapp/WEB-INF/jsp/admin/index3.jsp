@@ -88,7 +88,7 @@
                         	<span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="<%=path %>/attendance/<%=employee.getEmployeeNumber() %>/oneself.do">考勤记录</a>
+                            <li><a class="J_menuItem" href="<%=path %>/attendance/oneself?employeeNumber=<%=employee.getEmployeeNumber()%>">考勤记录</a>
                             </li>
                         </ul>
                     </li>

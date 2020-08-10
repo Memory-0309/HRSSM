@@ -1,9 +1,13 @@
 package com.hr.controller;
 
 import com.hr.service.AttendanceService;
+import com.hr.vo.EmpAttendVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("attendance")
@@ -24,4 +28,10 @@ public class AttendanceController {
         return "welcome";
     }
 
+    @RequestMapping("oneself")
+    public String oneself(Integer employeeNumber, HttpServletRequest request){
+      List<EmpAttendVO> list = attendanceService.selectLeveByEmpnumber(employeeNumber);
+      request.setAttribute("aList",list);
+      return "admin/attendance_list";
+    }
 }
