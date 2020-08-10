@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.dao.EmployeeDao">
+    <select id="findByNumber" resultType="com.hr.pojo.Employee">
+        select * from employee where employee_number = #{number}
+    </select>
+
+    <select id="findByNumberVO" resultType="com.hr.vo.EmployeePositionVO">
+        select level from employee e join position p on
+        e.position_number=p.position_number
+        where e.employee_number = #{number};
+    </select>
+
+</mapper>

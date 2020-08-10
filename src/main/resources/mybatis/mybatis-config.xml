@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--全局配置-->
+    <settings>
+        <!--是否开启自动驼峰名命规则映射
+        即从数据库列表名 A_COLUMN
+        到Java属性名 aCoulumn
+        -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启sql日志输出-->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+
+    </settings>
+</configuration>

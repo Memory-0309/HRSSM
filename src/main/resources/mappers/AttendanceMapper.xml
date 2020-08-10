@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.dao.AttendanceDao">
+
+
+    <select id="selectLeveByEmpnumber" resultType="java.lang.String">
+        select level from employee e join position p
+        on e.position_number = p.position_number
+        where e.employee_number =#{employeeNumber}
+    </select>
+
+    <select id="selectAttendanceByEmpnumber" resultType="com.hr.vo.EmpAttendVO">
+        select e.employee_number as employeeNumber ,name,
+         day,time_type,start_time,start_type,end_time,end_type
+        from employee e join attendance a on e.employee_number
+        =a.employee_number where e.employee_number=#{employeeNumber}
+    </select>
+
+    <select id="selectDeptnoAttendance" resultType="com.hr.vo.EmpAttendVO">
+        select e.employee_number as employeeNumber,e.name as name,
+        day,time_type,start_time,start_type,end_time,end_type
+        from attendance join employee on
+        attendance.employee_number=employee.employee_number
+        join employee e on
+        employee.department_number = e.department_number
+        where e.employee_number=#{employeeNumber};
+    </select>
+
+    <select id="selectAllAttendance" resultType="com.hr.vo.EmpAttendVO">
+        select e.employee_number,name,
+        day,time_type,start_time,start_type,end_time,end_type
+        from employee e join attendance a on e.employee_number
+        =a.employee_number
+    </select>
+
+
+
+    <insert id="insertStart">
+        insert into attendance
+         (id,employee_number,day,time_type,start_time,
+         start_type,work_type,notes)
+         value (
+        #{id},#{employeeNumber},#{day},#{timeType},
+        #{startTime}, #{startType},#{workType}, #{notes}
+        )
+    </insert>
+
+    <update id="insertEnd">
+        update attendance set end_time =#{endTime} , end_type=#{endType}
+        where employee_number=#{employeeNumber} and day=#{day}
+    </update>
+
+</mapper>
