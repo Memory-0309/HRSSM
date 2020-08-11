@@ -94,7 +94,7 @@
 							<span class="fa arrow"></span>
 						</a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="<%=path %>/employee/listPage.do?pageNo=1">在职员工管理</a>
+							<li><a class="J_menuItem" href="<%=path %>/employee/empList">在职员工管理</a>
 							</li>
 							<li><a class="J_menuItem" href="<%=path %>/history/retireListPage.do?pageNo=1">离休员工管理</a>
 							</li>

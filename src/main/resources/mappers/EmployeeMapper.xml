@@ -13,4 +13,14 @@
         where e.employee_number = #{number};
     </select>
 
+    <select id="findAll" resultType="com.hr.vo.EmpDeptPosVO">
+        select e.id as id,e.employee_number as employeeNumber,
+        e.name as empName,gender,e.telephone as telephone,
+        d.name as deptName,
+        p.name as positionName,in_time
+        from employee e join department d
+        on e.department_number=d.department_number
+        join position p on e.position_number = p.position_number
+    </select>
+
 </mapper>

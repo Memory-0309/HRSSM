@@ -3,9 +3,12 @@ package com.hr.service;
 import com.hr.comm.Result;
 import com.hr.dao.EmployeeDao;
 import com.hr.pojo.Employee;
+import com.hr.vo.EmpDeptPosVO;
 import com.hr.vo.EmployeePositionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -25,5 +28,11 @@ public class EmployeeServiceImpl implements EmployeeService{
         }else {
             return  result;
         }
+    }
+
+    @Override
+    public List<EmpDeptPosVO> empList() {
+        List<EmpDeptPosVO> list = employeeDao.findAll();
+        return list;
     }
 }

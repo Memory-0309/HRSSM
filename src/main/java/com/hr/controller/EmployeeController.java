@@ -3,12 +3,15 @@ package com.hr.controller;
 import com.hr.comm.Result;
 import com.hr.pojo.Employee;
 import com.hr.service.EmployeeService;
+import com.hr.vo.EmpDeptPosVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/employee")
@@ -21,7 +24,12 @@ public class EmployeeController {
         return page;
     }
 
-
+    @RequestMapping("empList")
+    public String empList(HttpServletRequest request){
+        List<EmpDeptPosVO> list = employeeService.empList();
+        request.setAttribute("list",list);
+        return "admin/employee_list";
+    }
    /* @RequestMapping("/login")
     public String showLogin(){
         System.out.println("员工登录");
