@@ -98,7 +98,8 @@
 							</li>
 							<li><a class="J_menuItem" href="<%=path %>/history/retireListPage.do?pageNo=1">离休员工管理</a>
 							</li>
-							<li><a class="J_menuItem" href="<%=path %>/history/list.do">员工档案管理</a>
+							<li><a class="J_menuItem" href="<%=path
+%>/history/list.do">员工档案管理</a>
 							</li>
 							<li><a class="J_menuItem" href="<%=path %>/move/list.do">员工调动记录</a>
 							</li>

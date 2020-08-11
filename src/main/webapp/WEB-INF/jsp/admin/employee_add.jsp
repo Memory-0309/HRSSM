@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="edu.hebeu.entity.*" %>
+<%@ page import="com.hr.pojo.*" %>
 <% String path = request.getContextPath(); %>
 <!DOCTYPE>
 <html>
@@ -32,11 +32,11 @@
 						<h5>添加员工</h5>
 					</div>
 					<div class="ibox-content">
-						<form method="post" class="form-horizontal" id="commentForm" action="<%=path %>/employee/add.do">
+						<form method="post" class="form-horizontal" id="commentForm" action="<%=path %>/employee/add">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">工号</label>
 								<div class="col-sm-7">
-									<% Integer employeeNumber = (Integer)request.getAttribute("employeeNumber"); %>
+									<% Integer employeeNumber = (Integer)request.getAttribute("maxNumber"); %>
 									<input type="text" class="form-control" name="employeeNumber" value="<%=employeeNumber %>" readonly="readonly">
 								</div>
 							</div>

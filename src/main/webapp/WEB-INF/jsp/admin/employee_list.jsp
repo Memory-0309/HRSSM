@@ -37,7 +37,7 @@
 				</div>
 				<div class="ibox-content">
 					<div style="margin-bottom: 8px">
-						<a href="<%=path %>/employee/toAdd.do" class="btn btn-success">添加员工</a>
+						<a href="<%=path %>/employee/toAdd" class="btn btn-success">添加员工</a>
 					</div>
 					<table class="table table-striped table-bordered table-hover dataTables-example">
 						<thead>

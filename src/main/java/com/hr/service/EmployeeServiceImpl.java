@@ -8,6 +8,7 @@ import com.hr.vo.EmployeePositionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,5 +35,18 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<EmpDeptPosVO> empList() {
         List<EmpDeptPosVO> list = employeeDao.findAll();
         return list;
+    }
+
+    @Override
+    public void addEmp(Employee employee) {
+        System.out.println(employee);
+        employee.setInTime(new Date());
+        employeeDao.addEmp(employee);
+    }
+
+    @Override
+    public Integer finMaxEmpNumber() {
+       Integer maxnumber = employeeDao.findMaxEmpNumber();
+       return maxnumber+1;
     }
 }

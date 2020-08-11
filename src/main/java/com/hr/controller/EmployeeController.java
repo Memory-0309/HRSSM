@@ -1,8 +1,12 @@
 package com.hr.controller;
 
 import com.hr.comm.Result;
+import com.hr.pojo.Department;
 import com.hr.pojo.Employee;
+import com.hr.pojo.Position;
+import com.hr.service.DepartmentService;
 import com.hr.service.EmployeeService;
+import com.hr.service.PositionService;
 import com.hr.vo.EmpDeptPosVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +22,34 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    DepartmentService departmentService;
+    @Autowired
+    PositionService positionService;
 
     @RequestMapping("{page}")
     public String showPage(@PathVariable String page){
         return page;
     }
 
+
+    @RequestMapping("add")
+    public String add(Employee employee){
+        System.out.println("controller:"+employee);
+        employeeService.addEmp(employee);
+        return "redirect:/employee/empList";
+    }
+
+    @RequestMapping("toAdd")
+    public String toAdd(HttpServletRequest request){
+        List<Department> dList = departmentService.findIdName();
+        List<Position> pList = positionService.findIdName();
+        Integer maxNumber =employeeService.finMaxEmpNumber();
+        request.setAttribute("maxNumber",maxNumber);
+        request.setAttribute("dList",dList);
+        request.setAttribute("pList",pList);
+        return "admin/employee_add";
+    }
     @RequestMapping("empList")
     public String empList(HttpServletRequest request){
         List<EmpDeptPosVO> list = employeeService.empList();
@@ -35,7 +61,6 @@ public class EmployeeController {
         System.out.println("员工登录");
         return "login";
     }
-
     @RequestMapping("/welcome")
     public String showWelcome(){
         return "welcome";
