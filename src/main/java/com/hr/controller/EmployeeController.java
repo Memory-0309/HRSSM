@@ -33,6 +33,13 @@ public class EmployeeController {
     }
 
 
+    @RequestMapping("{id}/delete")
+    public String delete(@PathVariable Integer id){
+        System.out.println("删除的id为："+id);
+        employeeService.deleteEmpById(id);
+        return "redirect:/employee/empList";
+    }
+
     @RequestMapping("add")
     public String add(Employee employee){
         System.out.println("controller:"+employee);

@@ -3,6 +3,7 @@ package com.hr.service;
 import com.hr.comm.Result;
 import com.hr.dao.EmployeeDao;
 import com.hr.pojo.Employee;
+import com.hr.pojo.History;
 import com.hr.vo.EmpDeptPosVO;
 import com.hr.vo.EmployeePositionVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,19 @@ public class EmployeeServiceImpl implements EmployeeService{
     public Integer finMaxEmpNumber() {
        Integer maxnumber = employeeDao.findMaxEmpNumber();
        return maxnumber+1;
+    }
+
+    @Override
+    public void deleteEmpById(Integer id) {
+        //首先根据ID去查询此员工的所有信息
+        History history = employeeDao.selectById(id);
+        //将查询出来的此员工的所有信息封装到History中
+        history.setOutTime(new Date());
+        history.setStatus("离职");
+        history.setId(null);
+        //删除emp表中数据
+        employeeDao.deleteEmpById(id);
+        //往history中添加一条数据
+        employeeDao.addHistory(history);
     }
 }

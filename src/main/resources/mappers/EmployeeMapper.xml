@@ -4,6 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hr.dao.EmployeeDao">
 
+    <select id="selectById" resultType="com.hr.pojo.History">
+        select * from employee where id = #{id}
+    </select>
+
+    <insert id="addHistory">
+        insert into history values (
+          #{id},#{employeeNumber},#{name},#{gender},#{birthday},
+          #{telephone},#{email},#{address},#{photo},#{education},
+          #{inTime},#{outTime},#{departmentNumber},#{positionNumber},
+          #{status},#{home},#{notes}
+        )
+    </insert>
+
+    <delete id="deleteEmpById">
+        delete from employee where id = #{id}
+    </delete>
+
     <select id="findMaxEmpNumber" resultType="java.lang.Integer">
         select max(employee_number) from employee;
     </select>
@@ -39,7 +56,7 @@
     </select>
 
     <select id="findAll" resultType="com.hr.vo.EmpDeptPosVO">
-        select e.id as id,e.employee_number as employeeNumber,
+        select e.id as empId,e.employee_number as employeeNumber,
         e.name as empName,gender,e.telephone as telephone,
         d.name as deptName,
         p.name as positionName,in_time

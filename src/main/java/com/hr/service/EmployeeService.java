@@ -16,8 +16,11 @@ public interface EmployeeService {
     //新增员工
     void addEmp(Employee employee);
 
-
     //查询员工最大编号
     Integer finMaxEmpNumber();
+
+    //删除员工
+    void deleteEmpById(Integer id);
+
 
 }

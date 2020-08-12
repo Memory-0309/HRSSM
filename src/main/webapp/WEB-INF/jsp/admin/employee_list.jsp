@@ -110,7 +110,8 @@
             shade: false //不显示遮罩
         }, function(){
             parent.layer.msg('删除成功！', {icon: 1});
-            location.href="./"+ id +"/delete.do";
+
+            location.href="./"+ id +"/delete";
         });
     }
 </script>
