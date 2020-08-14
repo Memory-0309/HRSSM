@@ -38,6 +38,7 @@
 				<div class="ibox-content">
 					<div style="margin-bottom: 8px">
 						<a href="<%=path %>/employee/toAdd" class="btn btn-success">添加员工</a>
+						<a class="btn btn-success" onclick="showEcharts()">查看各部门员工分布</a>
 					</div>
 					<table class="table table-striped table-bordered table-hover dataTables-example">
 						<thead>
@@ -72,7 +73,7 @@
 							%>
 							<td><%=intime %></td>
 							<td><a href="<%=path %>/employee/<%=edp.getEmpId() %>/detial.do" class="btn btn-info">查看</a>&nbsp;&nbsp;
-								<a href="<%=path %>/employee/<%=edp.getEmpId()  %>/toUpdate.do" class="btn btn-primary">修改</a>&nbsp;&nbsp;
+								<a href="<%=path %>/employee/<%=edp.getEmpId()  %>/employee_update" class="btn btn-primary">修改</a>&nbsp;&nbsp;
 								<a onclick="del(<%=edp.getEmpId()  %>)" class="btn btn-danger delete">删除</a></td>
 						</tr>
 						<%
@@ -80,15 +81,24 @@
 						%>
 						</tbody>
 					</table>
-					<!--分页div删除-->
+
 				</div>
 			</div>
+		</div>
+		<!--此DIV用来存放可视化数据-->
+		<div class="col-sm-12" id="EchartsMain" style="height: 300px;">
+
+
+
 		</div>
 	</div>
 </div>
 
 <!-- 全局js -->
+<script type="text/javascript" src="<%=path %>/js/echarts.js"></script>
 <script src="<%=path %>/js/jquery.min.js?v=2.1.4"></script>
+
+
 <script src="<%=path %>/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=path %>/js/plugins/jeditable/jquery.jeditable.js"></script>
 
@@ -103,6 +113,61 @@
 <script src="js/plugins/layer/layer.min.js"></script>
 
 <script type="text/javascript">
+	
+	function showEcharts() {
+		alert("显示Ecarts");
+        $("#EchartsMain").css("display","block")
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('EchartsMain'));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '部门员工数量'
+            },
+            tooltip: {},
+            legend: {
+                data:['人数']
+            },
+            xAxis: {
+                data: []
+            },
+            yAxis: {},
+            series: [{
+                name: '人数',
+                type: 'bar',
+                data: []
+            }]
+        };
+        //设置加载动画
+        //myChart.showLoading()
+		//定义两个变量 部门名称 和  人数
+		var deprname = []; //部门名称
+        var deptsum = []; //部门人数
+		//利用ajax请求 获取返回值参数 给上面两个变量赋值
+		$.post("/employee/showEcharts","",function (result) {
+			console.log(result)
+			for (var i=0;i<result.length;i++){
+			    deprname.push(result[i].deptName)
+                deptsum.push(result[i].deptSum)
+			}
+			console.log(deprname)
+            console.log(deptsum)
+            //隐藏加载动画
+            myChart.hideLoading();
+            //覆盖数据根据数据在家数据图表
+            myChart.setOption({
+                xAxis: {
+                    data: deprname
+                },
+                series: [{
+                    data: deptsum
+                }]
+            })
+
+        })
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
 
     function del(id){
         parent.layer.confirm('确认删除？', {

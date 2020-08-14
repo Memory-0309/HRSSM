@@ -27,4 +27,5 @@ public class History {
     private String status;
     private String home;
     private String notes;
+    private String password;
 }

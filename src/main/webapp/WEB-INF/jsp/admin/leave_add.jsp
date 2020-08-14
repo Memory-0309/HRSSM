@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="edu.hebeu.entity.*" %>
+<%@ page import="com.hr.pojo.*" %>
 <% String path = request.getContextPath(); %>
 <!DOCTYPE>
 <html>
@@ -34,7 +34,7 @@
 					<div class="ibox-content">
 						<% Employee employee = (Employee)session.getAttribute("loged");%>
 						<form method="post" class="form-horizontal" id="commentForm" 
-							action="<%=path %>/leave/add.do?employeeNumber=<%=employee.getEmployeeNumber() %>">
+							action="<%=path %>/leave/add?employeeNumber=<%=employee.getEmployeeNumber() %>">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">姓名：</label>
 								
@@ -45,13 +45,13 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">起始时间</label>
 								<div class="col-sm-7">
-									<input type="date" class="form-control" name="start" required>
+									<input type="date" class="form-control" name="startTime" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">结束时间</label>
 								<div class="col-sm-7">
-									<input type="date" class="form-control" name="end" required>
+									<input type="date" class="form-control" name="endTime" required>
 								</div>
 							</div>
 							<div class="form-group">

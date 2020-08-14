@@ -3,21 +3,25 @@ package com.hr.controller;
 import com.hr.comm.Result;
 import com.hr.pojo.Department;
 import com.hr.pojo.Employee;
+import com.hr.pojo.History;
 import com.hr.pojo.Position;
 import com.hr.service.DepartmentService;
 import com.hr.service.EmployeeService;
 import com.hr.service.PositionService;
+import com.hr.vo.EmpDeptEchartsVO;
 import com.hr.vo.EmpDeptPosVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+//@RestController  //相当于 @Controller + @ResponseBody
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
@@ -27,11 +31,26 @@ public class EmployeeController {
     @Autowired
     PositionService positionService;
 
+    @RequestMapping("showEcharts")
+    @ResponseBody
+    public Object showEcharts(){
+        System.out.println("showEcharts");
+        List<EmpDeptEchartsVO> list = employeeService.showEcharts();
+        return list;
+    }
+
     @RequestMapping("{page}")
     public String showPage(@PathVariable String page){
         return page;
     }
 
+    @RequestMapping("{id}/update")
+    public String update(@PathVariable Integer id, History history){
+        history.setId(id);
+        System.out.println(history);
+        employeeService.updateEmp(history);
+        return "redirect:/employee/empList";
+    }
 
     @RequestMapping("{id}/delete")
     public String delete(@PathVariable Integer id){
@@ -40,6 +59,19 @@ public class EmployeeController {
         return "redirect:/employee/empList";
     }
 
+    @RequestMapping("{id}/{path}")
+    public String toUpdate(@PathVariable("id") Integer id,
+                           @PathVariable("path") String path,
+                            HttpServletRequest request){
+        System.out.println("id:"+id+"path:"+path);
+        Employee employee = employeeService.findById(id);
+        List<Department> dList = departmentService.findIdName();
+        List<Position> pList = positionService.findIdName();
+        request.setAttribute("employee",employee);
+        request.setAttribute("dList",dList);
+        request.setAttribute("pList",pList);
+        return "admin/"+path;
+    }
     @RequestMapping("add")
     public String add(Employee employee){
         System.out.println("controller:"+employee);

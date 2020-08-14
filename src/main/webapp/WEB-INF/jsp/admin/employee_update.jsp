@@ -1,8 +1,8 @@
-<%@page import="edu.hebeu.util.MTimeUtil"%>
+<%@page import="com.hr.util.MTimeUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="edu.hebeu.entity.*" %>
+<%@ page import="com.hr.pojo.*" %>
 <% String path = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
@@ -34,7 +34,7 @@
 					</div>
 					<div class="ibox-content">
 						<% Employee employee = (Employee)request.getAttribute("employee"); %>
-						<form method="post" class="form-horizontal" id="commentForm" action="<%=path %>/employee/<%=employee.getId() %>/update.do">
+						<form method="post" class="form-horizontal" id="commentForm" action="<%=path %>/employee/<%=employee.getId() %>/update">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">工号</label>
 								<div class="col-sm-7">

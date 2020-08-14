@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.dao.LeaveDao">
+
+    <insert id="insertLea">
+        insert into lea values (null,#{employeeNumber},#{departmentNumber},
+          #{startTime},#{endTime},#{days},#{reason},
+          #{type},null,'未批准',null
+        )
+    </insert>
+
+    <select id="findAllNotList" resultType="com.hr.pojo.Lea">
+        select * from lea where status='未批准' order by id desc;
+    </select>
+
+    <update id="updateStatus">
+        update lea set status ='已批准' where id = #{id}
+    </update>
+
+</mapper>

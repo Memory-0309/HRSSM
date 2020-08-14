@@ -122,7 +122,7 @@
 							<span class="fa arrow"></span>
 						</a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="<%=path %>/leave/notlist.do">未批准列表</a>
+							<li><a class="J_menuItem" href="<%=path %>/leave/notlist">未批准列表</a>
 							</li>
 							<li><a class="J_menuItem" href="<%=path %>/leave/yeslist.do">已批准列表</a>
 							</li>

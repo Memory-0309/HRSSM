@@ -110,7 +110,7 @@
                        		<span class="fa arrow"></span>
                        	</a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="<%=path %>/leave/toAdd.do">申请请假</a>
+                            <li><a class="J_menuItem" href="<%=path %>/leave/toAdd">申请请假</a>
                             </li>
                            <li><a class="J_menuItem" href="<%=path %>/leave/oneself.do?pageNo=1">请假记录</a>
                             </li>

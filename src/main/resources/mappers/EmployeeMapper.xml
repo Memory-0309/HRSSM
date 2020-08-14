@@ -4,6 +4,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hr.dao.EmployeeDao">
 
+    <select id="findEcharts" resultType="com.hr.vo.EmpDeptEchartsVO">
+      select d.name as deptName ,count(*) as deptSum  from
+      employee e join department d on
+      e.department_number = d.department_number
+      group by e.department_number
+    </select>
+
+
+
+    <update id="updateEmp">
+       update employee set
+         name=#{name},
+         gender=#{gender},
+         birthday=#{birthday},
+         telePhone=#{telephone},
+         email=#{email},
+         address=#{address},
+         photo=#{photo},
+         education=#{education},
+         department_number=#{departmentNumber},
+         position_number=#{positionNumber},
+         in_time=#{inTime},
+         password=#{password},
+         notes=#{notes}
+         where id=#{id}
+    </update>
+
+    <select id="findById" resultType="com.hr.pojo.Employee">
+        select * from employee where id = #{id}
+    </select>
+
     <select id="selectById" resultType="com.hr.pojo.History">
         select * from employee where id = #{id}
     </select>
